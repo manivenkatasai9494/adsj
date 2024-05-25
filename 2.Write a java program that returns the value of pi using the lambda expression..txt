@@ -1,0 +1,13 @@
+2.Write a java program that returns the value of pi using the lambda expression.
+    //PiLambdaExpression.java
+public class PiLambdaExpression{
+    @FunctionalInterface
+    interface PiValue{
+        double getPi();
+    }
+    public static void main(String[] args) {
+        PiValue pi = () -> Math.PI;
+        double p= pi.getPi();
+        System.out.println("The value of Pi is: " + p);
+    }
+}

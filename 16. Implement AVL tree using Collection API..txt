@@ -1,0 +1,136 @@
+16. Implement AVL tree using Collection API.
+//16)AVL TRee
+import java.util.Comparator;
+
+class AVLNode<T extends Comparable<T>> {
+    T data;
+    AVLNode<T> left, right;
+    int height;
+
+    public AVLNode(T data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+        this.height = 1;
+    }
+}
+
+public class AVLTree<T extends Comparable<T>> {
+    private AVLNode<T> root;
+
+    public AVLTree() {
+        this.root = null;
+    }
+
+    private int height(AVLNode<T> node) {
+        if (node == null) return 0;
+        return node.height;
+    }
+
+    private int getBalance(AVLNode<T> node) {
+        if (node == null) return 0;
+        return height(node.left) - height(node.right);
+    }
+
+    public AVLNode<T> insert(AVLNode<T> node, T data) {
+        if (node == null) return new AVLNode<>(data);
+
+        if (data.compareTo(node.data) < 0) {
+            node.left = insert(node.left, data);
+        } else if (data.compareTo(node.data) > 0) {
+            node.right = insert(node.right, data);
+        } else {
+            return node; // Duplicate keys not allowed
+        }
+
+        // Update height of this ancestor node
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+
+        // Get the balance factor and perform rotation if needed
+        int balance = getBalance(node);
+
+        // Left Left Case
+        if (balance > 1 && data.compareTo(node.left.data) < 0) {
+            return rightRotate(node);
+        }
+
+        // Right Right Case
+        if (balance < -1 && data.compareTo(node.right.data) > 0) {
+            return leftRotate(node);
+        }
+
+        // Left Right Case
+        if (balance > 1 && data.compareTo(node.left.data) > 0) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+
+        // Right Left Case
+        if (balance < -1 && data.compareTo(node.right.data) < 0) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
+
+        return node;
+    }
+
+    private AVLNode<T> rightRotate(AVLNode<T> y) {
+        AVLNode<T> x = y.left;
+        AVLNode<T> T2 = x.right;
+
+        // Perform rotation
+        x.right = y;
+        y.left = T2;
+
+        // Update heights
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+
+        return x;
+    }
+
+    private AVLNode<T> leftRotate(AVLNode<T> x) {
+        AVLNode<T> y = x.right;
+        AVLNode<T> T2 = y.left;
+
+        // Perform rotation
+        y.left = x;
+        x.right = T2;
+
+        // Update heights
+        x.height = Math.max(height(x.left), height(x.right)) + 1;
+        y.height = Math.max(height(y.left), height(y.right)) + 1;
+
+        return y;
+    }
+
+    public void insert(T data) {
+        root = insert(root, data);
+    }
+
+    public void inorderTraversal() {
+        inorderTraversal(root);
+        System.out.println();
+    }
+
+    private void inorderTraversal(AVLNode<T> node) {
+        if (node != null) {
+            inorderTraversal(node.left);
+            System.out.print(node.data + " ");
+            inorderTraversal(node.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        AVLTree<Integer> avlTree = new AVLTree<>();
+        avlTree.insert(10);
+        avlTree.insert(20);
+        avlTree.insert(30);
+        avlTree.insert(40);
+        avlTree.insert(50);
+        avlTree.insert(25);
+
+        System.out.println("Inorder traversal:");
+        avlTree.inorderTraversal();
+    }
+}

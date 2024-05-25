@@ -1,0 +1,86 @@
+6 a) Write a java program to implement Generic stack using Array List Collection class.
+//6a)generic stack using arraylist
+class GStack<T> {
+    private int maxSize;
+    private T[] stackArray;
+    private int top;
+
+    public GStack(int size) {
+        maxSize = size;
+        stackArray = createGenericArray(maxSize);
+        top = -1;
+    }
+    
+    @SuppressWarnings("unchecked")
+    private T[] createGenericArray(int size) {
+        return (T[]) new Object[size];
+    }
+
+    public void push(T element) {
+        if (isFull()) {
+            throw new StackOverflowError("Stack is full");
+        }
+        stackArray[++top] = element;
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stackArray[top--];
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stackArray[top];
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return top == maxSize - 1;
+    }
+}
+
+public class GStackArray {
+    public static void main(String[] args) {
+        GStack<Integer> intStack = new GStack<>(5);
+
+        intStack.push(10);
+        intStack.push(20);
+        intStack.push(30);
+
+        int poppedInt = intStack.pop();
+        System.out.println("Popped integer: " + poppedInt);
+
+        int topInt = intStack.peek();
+        System.out.println("Top integer: " + topInt);
+
+        boolean isIntStackEmpty = intStack.isEmpty();
+        System.out.println("Is stack of integers empty? " + isIntStackEmpty);
+
+        boolean isIntStackFull = intStack.isFull();
+        System.out.println("Is stack of integers full? " + isIntStackFull);
+
+        GStack<String> stringStack = new GStack<>(3);
+
+        stringStack.push("Hello");
+        stringStack.push("World");
+
+        String poppedString = stringStack.pop();
+        System.out.println("Popped string: " + poppedString);
+
+        String topString = stringStack.peek();
+        System.out.println("Top string: " + topString);
+
+        boolean isStringStackEmpty = stringStack.isEmpty();
+        System.out.println("Is stack of strings empty? " + isStringStackEmpty);
+
+        boolean isStringStackFull = stringStack.isFull();
+        System.out.println("Is stack of strings full? " + isStringStackFull);
+    }
+}

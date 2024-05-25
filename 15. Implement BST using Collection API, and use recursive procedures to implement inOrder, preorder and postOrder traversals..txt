@@ -1,0 +1,130 @@
+15. Implement BST using Collection API, and use recursive procedures to implement inOrder, preorder and postOrder traversals.
+//15)BinarySearchTree
+import java.util.LinkedList;
+
+class TreeNode<T extends Comparable<T>> {
+    T data;
+    TreeNode<T> left, right;
+
+    public TreeNode(T data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class BinarySearchTree<T extends Comparable<T>> {
+    private TreeNode<T> root;
+
+    public BinarySearchTree() {
+        this.root = null;
+    }
+
+    public void insert(T data) {
+        root = insertRec(root, data);
+    }
+
+    private TreeNode<T> insertRec(TreeNode<T> root, T data) {
+        if (root == null) {
+            root = new TreeNode<>(data);
+            return root;
+        }
+
+        if (data.compareTo(root.data) < 0) {
+            root.left = insertRec(root.left, data);
+        } else if (data.compareTo(root.data) > 0) {
+            root.right = insertRec(root.right, data);
+        }
+
+        return root;
+    }
+
+    public void inorderTraversal() {
+        inorderTraversalRec(root);
+    }
+
+    private void inorderTraversalRec(TreeNode<T> root) {
+        if (root != null) {
+            inorderTraversalRec(root.left);
+            System.out.print(root.data + " ");
+            inorderTraversalRec(root.right);
+        }
+    }
+
+    public void preorderTraversal() {
+        preorderTraversalRec(root);
+    }
+
+    private void preorderTraversalRec(TreeNode<T> root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
+            preorderTraversalRec(root.left);
+            preorderTraversalRec(root.right);
+        }
+    }
+
+    public void postorderTraversal() {
+        postorderTraversalRec(root);
+    }
+
+    private void postorderTraversalRec(TreeNode<T> root) {
+        if (root != null) {
+            postorderTraversalRec(root.left);
+            postorderTraversalRec(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+
+    public void delete(T data) {
+        root = deleteRec(root, data);
+    }
+
+    private TreeNode<T> deleteRec(TreeNode<T> root, T data) {
+        if (root == null) return root;
+
+        if (data.compareTo(root.data) < 0) {
+            root.left = deleteRec(root.left, data);
+        } else if (data.compareTo(root.data) > 0) {
+            root.right = deleteRec(root.right, data);
+        } else {
+            if (root.left == null) return root.right;
+            else if (root.right == null) return root.left;
+
+            root.data = minValue(root.right);
+            root.right = deleteRec(root.right, root.data);
+        }
+        return root;
+    }
+
+    private T minValue(TreeNode<T> root) {
+        T minv = root.data;
+        while (root.left != null) {
+            minv = root.left.data;
+            root = root.left;
+        }
+        return minv;
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(70);
+        bst.insert(60);
+        bst.insert(80);
+
+        System.out.println("Inorder traversal:");
+        bst.inorderTraversal();
+        System.out.println("\nPreorder traversal:");
+        bst.preorderTraversal();
+        System.out.println("\nPostorder traversal:");
+        bst.postorderTraversal();
+
+        System.out.println("\nDeleting 20:");
+        bst.delete(20);
+        System.out.println("Inorder traversal after deletion:");
+        bst.inorderTraversal();
+    }
+}

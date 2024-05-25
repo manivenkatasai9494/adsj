@@ -1,0 +1,70 @@
+6.b) Write a java program to implement Generic stack using LinkedList Collection class.
+//6b)generic stack using linked list
+import java.util.LinkedList;
+
+class GStack<T> {
+    private LinkedList<T> stack;
+
+    public GStack() {
+        stack = new LinkedList<>();
+    }
+
+    public void push(T element) {
+        stack.addLast(element);
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stack.removeLast();
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stack.getLast();
+    }
+
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public int size() {
+        return stack.size();
+    }
+}
+
+public class GStackLinkedList {
+    public static void main(String[] args) {
+        GStack<Integer> intStack = new GStack<>();
+
+        intStack.push(10);
+        intStack.push(20);
+        intStack.push(30);
+
+        int poppedInt = intStack.pop();
+        System.out.println("Popped integer: " + poppedInt);
+
+        int topInt = intStack.peek();
+        System.out.println("Top integer: " + topInt);
+
+        boolean isIntStackEmpty = intStack.isEmpty();
+        System.out.println("Is stack of integers empty? " + isIntStackEmpty);
+
+        GStack<String> stringStack = new GStack<>();
+
+        stringStack.push("Hello");
+        stringStack.push("World");
+
+        String poppedString = stringStack.pop();
+        System.out.println("Popped string: " + poppedString);
+
+        String topString = stringStack.peek();
+        System.out.println("Top string: " + topString);
+
+        boolean isStringStackEmpty = stringStack.isEmpty();
+        System.out.println("Is stack of strings empty? " + isStringStackEmpty);
+    }
+}

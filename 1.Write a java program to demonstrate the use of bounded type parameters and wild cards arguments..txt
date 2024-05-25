@@ -1,0 +1,70 @@
+1.	Write a java program to demonstrate the use of bounded type parameters and wild cards arguments.
+	//BoundedType
+              //MagicBox.java
+ class BoundedArithematic<T extends Number> {
+    public double add(T a, T b) {
+        return a.doubleValue() + b.doubleValue();
+    }
+    public double subtract(T a, T b) {
+        return a.doubleValue() - b.doubleValue();
+    }
+    public double multiply(T a, T b) {
+        return a.doubleValue() * b.doubleValue();
+    }
+    public double divide(T a, T b) {
+        if (b.doubleValue() == 0) {
+            throw new ArithmeticException("Division by zero is not allowed.");
+        }
+        return a.doubleValue() / b.doubleValue();
+    }
+    public static void main(String[] args) {
+        BoundedArithematic<Number> calculator = new BoundedArithematic<>();
+        Integer a = 10;
+        Integer b = 5;
+        System.out.println("Addition: " + calculator.add(a, b));
+        System.out.println("Subtraction: " + calculator.subtract(a, b));
+        System.out.println("Multiplication: " + calculator.multiply(a, b));
+        System.out.println("Division: " + calculator.divide(a, b));
+    }
+}
+
+//Wildcard Arguments
+public class MagicBox<T> {
+    private T item;
+
+    public void addItem(T item) {
+        this.item = item;
+        System.out.println("Added item to the magic box: " + item);
+    }
+
+    public T getItem() {
+        return item;
+    }
+
+    public void processBox(MagicBox<? super Integer> box) {
+        System.out.println("Items in the box are processed["+box.getItem()+"]");
+    }
+
+    public static void main(String[] args) {
+
+        MagicBox<Integer> integerBox = new MagicBox<>();
+        integerBox.addItem(43);
+
+        MagicBox<String> stringBox = new MagicBox<>();
+        stringBox.addItem("mani");
+
+
+        MagicBox<Boolean> booleanBox = new MagicBox<>();
+        booleanBox.addItem(false);
+
+        MagicBox<Object> dobubleBox = new MagicBox<>();
+        dobubleBox.addItem(43.43);
+
+        integerBox.processBox(integerBox);
+        dobubleBox.processBox(dobubleBox);
+
+
+
+
+    }
+}

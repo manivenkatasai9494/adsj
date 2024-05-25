@@ -1,0 +1,224 @@
+8) Write a java program to demonstrate the use of the following Collection classes.
+a. HashSet
+//8a)HashSet
+import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+
+class Contact {
+    private String name;
+    private String email;
+
+    public Contact(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return name.equals(contact.name) && email.equals(contact.email);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
+}
+
+
+public class HashSetContactDemo {
+    public static void main(String[] args) {
+        HashSet<Contact> contactSet = new HashSet<>();
+
+        contactSet.add(new Contact("John", "john@example.com"));
+        contactSet.add(new Contact("Jane", "jane@example.com"));
+        contactSet.add(new Contact("Alice", "alice@example.com"));
+
+        System.out.println("HashSet of Contacts:");
+        for (Contact contact : contactSet) {
+            System.out.println(contact);
+        }
+
+        // Demonstrate contains method
+        Contact searchContact = new Contact("John", "john@example.com");
+        System.out.println("Contains 'John'? " + contactSet.contains(searchContact));
+
+        // Demonstrate isEmpty method
+        System.out.println("Is the HashSet empty? " + contactSet.isEmpty());
+
+      
+        System.out.println("Size of the HashSet: " + contactSet.size());
+
+        // Demonstrate remove method
+        contactSet.remove(new Contact("Jane", "jane@example.com"));
+        System.out.println("HashSet after removing 'Jane': " + contactSet);
+
+        // Adding contacts again for further demonstrations
+        contactSet.add(new Contact("Jane", "jane@example.com"));
+
+        // Demonstrate iteration using iterator
+        System.out.println("Iteration using Iterator:");
+        Iterator<Contact> iterator = contactSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        // Demonstrate toArray method
+        Object[] array = contactSet.toArray();
+        System.out.print("HashSet as Array: ");
+        for (Object element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+
+        // Demonstrate hashCode method
+        System.out.println("Hash code of the HashSet: " + contactSet.hashCode());
+    }
+}
+=======
+b. Linked List
+//8b)LinkedHashSet
+import java.util.LinkedHashSet;
+import java.util.Iterator;
+
+public class LinkedHashSetDemo {
+    public static void main(String[] args) {
+        
+        LinkedHashSet<String> lhs= new LinkedHashSet<>();
+        
+        lhs.add("Apple");
+        lhs.add("Banana");
+        lhs.add("Orange");
+        lhs.add("Grapes");
+        lhs.add("Watermelon");
+        System.out.println("LinkedHashSet: " + lhs);        
+        System.out.println("Contains 'Banana'? " + lhs.contains("Banana"));        
+        System.out.println("Is the LinkedHashSet empty? " + lhs.isEmpty());        
+        System.out.println("Size of the LinkedHashSet: " + lhs.size());       
+        lhs.remove("Orange");
+        System.out.println("LinkedHashSet after removing 'Orange': " + lhs);
+        lhs.clear();
+        System.out.println("LinkedHashSet after clearing: " + lhs);
+        lhs.add("Apple");
+        lhs.add("Banana");
+        lhs.add("Orange");
+        System.out.println("Iteration using Iterator:");
+        Iterator<String> iterator = lhs.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+        Object[] array = lhs.toArray();
+        System.out.print("LinkedHashSet as Array: ");
+        for (Object element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+        System.out.println("Hash code of the LinkedHashSet: " + lhs.hashCode());
+    }
+}
+===
+c. TreeSet
+//8c)TreeSet
+import java.util.TreeSet;
+import java.util.Iterator;
+import java.util.TreeSet;
+import java.util.Iterator;
+
+class Employee2 implements Comparable<Employee2> {
+    private String name;
+    private int id;
+
+    public Employee2(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public int compareTo(Employee2 other) {
+        return Integer.compare(this.id, other.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
+}
+
+
+public class TreeSetEmployeeDemo {
+    public static void main(String[] args) {
+        
+        TreeSet<Employee2> treeSet = new TreeSet<>();
+        
+        treeSet.add(new Employee2("John", 101));
+        treeSet.add(new Employee2("Jane", 102));
+        treeSet.add(new Employee2("Alice", 103));
+
+        System.out.println("TreeSet of Employees:");
+        for (Employee2 employee : treeSet) {
+            System.out.println(employee);
+        }
+
+        Employee2 searchEmployee = new Employee2("John", 101);
+        System.out.println("Contains 'John'? " + treeSet.contains(searchEmployee));
+
+        System.out.println("Is the TreeSet empty? " + treeSet.isEmpty());
+
+        System.out.println("Size of the TreeSet: " + treeSet.size());
+
+        treeSet.remove(new Employee2("Jane", 102));
+        System.out.println("TreeSet after removing 'Jane': " + treeSet);
+
+        treeSet.clear();
+        System.out.println("TreeSet after clearing: " + treeSet);
+
+        treeSet.add(new Employee2("John", 101));
+        treeSet.add(new Employee2("Jane", 102));
+
+        System.out.println("Iteration using Iterator:");
+        Iterator<Employee2> iterator = treeSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        Object[] array = treeSet.toArray();
+        System.out.print("TreeSet as Array: ");
+        for (Object element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+        System.out.println("Hash code of the TreeSet: " + treeSet.hashCode());
+    }
+}

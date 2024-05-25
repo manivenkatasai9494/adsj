@@ -1,0 +1,57 @@
+7.a) Write a Java program to implement Generic queue using ArrayList Collection class.
+//7a)generic queue using arraylist
+import java.util.ArrayList;
+class GenericQueue<T> {
+    private ArrayList<T> queue;
+    public GenericQueue() {
+        queue = new ArrayList<>();
+    }
+    public void enqueue(T element) {
+        queue.add(element);
+    }
+
+    public T dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue.remove(0);
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return queue.get(0);
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public int size() {
+        return queue.size();
+    }
+}
+
+public class GenericQueueExample {
+    public static void main(String[] args) {
+        GenericQueue<Integer> intQueue = new GenericQueue<>();
+
+        intQueue.enqueue(10);
+        intQueue.enqueue(20);
+        intQueue.enqueue(30);
+
+        System.out.println("Dequeued element: " + intQueue.dequeue());
+        System.out.println("Peeked element: " + intQueue.peek());
+        System.out.println("Queue size: " + intQueue.size());
+
+        GenericQueue<String> stringQueue = new GenericQueue<>();
+
+        stringQueue.enqueue("Hello");
+        stringQueue.enqueue("World");
+
+        System.out.println("\nDequeued element: " + stringQueue.dequeue());
+        System.out.println("Peeked element: " + stringQueue.peek());
+        System.out.println("Queue size: " + stringQueue.size());
+    }
+}

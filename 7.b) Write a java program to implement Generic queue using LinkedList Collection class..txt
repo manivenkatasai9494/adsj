@@ -1,0 +1,49 @@
+7.b) Write a java program to implement Generic queue using LinkedList Collection class.
+//7b)generic queue using arraylist
+import java.util.LinkedList;
+class GenericQueue<T> {
+    private LinkedList<T> q;
+
+    public GenericQueue() {
+        q = new LinkedList<>();
+   }
+    public void enqueue(T element) {
+        q.add(element);
+    }
+    public T dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return q.remove(0);
+    }
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return q.get(0);
+    }
+    public boolean isEmpty() {
+        return q.isEmpty();
+    }
+
+    public int size() {
+        return q.size();
+    }
+}
+public class GenericQueueLLExample {
+    public static void main(String[] args) {
+        GenericQueue<Integer> intQueue = new GenericQueue<>();
+        intQueue.enqueue(10);
+        intQueue.enqueue(20);
+        intQueue.enqueue(30);
+        System.out.println("Dequeued element: " + intQueue.dequeue());
+        System.out.println("Peeked element: " + intQueue.peek());
+        System.out.println("Queue size: " + intQueue.size());
+        GenericQueue<String> stringQueue = new GenericQueue<>();
+        stringQueue.enqueue("Hello");
+        stringQueue.enqueue("World");
+        System.out.println("\nDequeued element: " + stringQueue.dequeue());
+        System.out.println("Peeked element: " + stringQueue.peek());
+        System.out.println("Queue size: " + stringQueue.size());
+    }
+}

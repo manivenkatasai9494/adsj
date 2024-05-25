@@ -1,0 +1,123 @@
+10. Write a java program to demonstrate the use of the following Collection classes.
+a. HashMap
+//10a)HashMap
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapExample{
+    public static void main(String[] args) {
+       
+        Map<String, Integer> ageMap = new HashMap<>();
+        
+        ageMap.put("John", 30);
+        ageMap.put("Alice", 25);
+        ageMap.put("Bob", 35);
+        ageMap.put("Eve", 28);
+        
+        System.out.println("Age of John: " + ageMap.get("John"));
+        System.out.println("Age of Alice: " + ageMap.get("Alice"));
+       
+        ageMap.put("John", 32);
+        System.out.println("Updated age of John: " + ageMap.get("John"));
+        
+        String name = "Bob";
+        if (ageMap.containsKey(name)) {
+            System.out.println(name + " exists in the map.");
+        } else {
+            System.out.println(name + " does not exist in the map.");
+        }
+        
+        ageMap.remove("Eve");
+        System.out.println("Map after removing Eve: " + ageMap);
+
+        System.out.println("Iterating over map entries:");
+        for (Map.Entry<String, Integer> entry : ageMap.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+        ageMap.clear();
+        System.out.println("Map after clearing: " + ageMap);
+    }
+}
+=====
+b.LinkedHashMap
+//10b)LinkedHashMap
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class LinkedHashMapExample{
+    public static void main(String[] args) {
+       
+        Map<String, Integer> ageMap = new LinkedHashMap<>();
+        
+        ageMap.put("John", 30);
+        ageMap.put("Alice", 25);
+        ageMap.put("Bob", 35);
+        ageMap.put("Eve", 28);
+        
+        System.out.println("Age of John: " + ageMap.get("John"));
+        System.out.println("Age of Alice: " + ageMap.get("Alice"));
+       
+        ageMap.put("John", 32);
+        System.out.println("Updated age of John: " + ageMap.get("John"));
+        
+        String name = "Bob";
+        if (ageMap.containsKey(name)) {
+            System.out.println(name + " exists in the map.");
+        } else {
+            System.out.println(name + " does not exist in the map.");
+        }
+        
+        ageMap.remove("Eve");
+        System.out.println("Map after removing Eve: " + ageMap);
+
+        System.out.println("Iterating over map entries:");
+        for (Map.Entry<String, Integer> entry : ageMap.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+        ageMap.clear();
+        System.out.println("Map after clearing: " + ageMap);
+    }
+}
+====
+c.TreeMap
+//10c)TreeMap
+import java.util.TreeMap;
+import java.util.Map;
+
+public class TreeMapExample{
+    public static void main(String[] args) {
+       
+        Map<String, Integer> ageMap = new TreeMap<>();
+        
+        ageMap.put("John", 30);
+        ageMap.put("Alice", 25);
+        ageMap.put("Bob", 35);
+        ageMap.put("Eve", 28);
+        
+        System.out.println("Age of John: " + ageMap.get("John"));
+        System.out.println("Age of Alice: " + ageMap.get("Alice"));
+       
+        ageMap.put("John", 32);
+        System.out.println("Updated age of John: " + ageMap.get("John"));
+        
+        String name = "Bob";
+        if (ageMap.containsKey(name)) {
+            System.out.println(name + " exists in the map.");
+        } else {
+            System.out.println(name + " does not exist in the map.");
+        }
+        
+        ageMap.remove("Eve");
+        System.out.println("Map after removing Eve: " + ageMap);
+
+        System.out.println("Iterating over map entries:");
+        for (Map.Entry<String, Integer> entry : ageMap.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+        ageMap.clear();
+        System.out.println("Map after clearing: " + ageMap);
+    }
+}

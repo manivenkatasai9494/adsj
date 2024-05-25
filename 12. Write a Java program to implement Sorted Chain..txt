@@ -1,0 +1,52 @@
+12. Write a Java program to implement Sorted Chain.
+//12)Sorted Chain
+class Node<T extends Comparable<T>> {
+    T data;
+    Node<T> next;
+
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class SortedChain<T extends Comparable<T>> {
+    private Node<T> head;
+
+    public void insert(T data) {
+        Node<T> newNode = new Node<>(data);
+        
+        if (head == null || head.data.compareTo(data) >= 0) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            Node<T> current = head;
+            while (current.next != null && current.next.data.compareTo(data) < 0) {
+                current = current.next;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    public void display() {
+        Node<T> current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        SortedChain<Integer> sortedChain = new SortedChain<>();
+        sortedChain.insert(5);
+        sortedChain.insert(3);
+        sortedChain.insert(7);
+        sortedChain.insert(1);
+        sortedChain.insert(9);
+
+        System.out.println("Sorted Chain:");
+        sortedChain.display();
+    }
+}

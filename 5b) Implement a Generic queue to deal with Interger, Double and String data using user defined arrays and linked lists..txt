@@ -1,0 +1,124 @@
+5b) Implement a Generic queue to deal with Interger, Double and String data using user defined arrays and linked lists.
+//5b)User-defined Generic Queue      
+import java.util.Scanner;
+
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class GenericQueueArray<T> {
+    private T[] queueArray;
+    private int front, rear, size, capacity;
+	@SuppressWarnings("unchecked")
+    public GenericQueueArray(int capacity) {
+        this.capacity = capacity;
+        this.queueArray = (T[]) new Object[capacity];
+        this.front = 0;
+        this.rear = capacity - 1;
+        this.size = 0;
+    }
+
+    public void enqueue(T item) {
+        if (isFull()) {
+            System.out.println("Queue is full");
+            return;
+        }
+        rear = (rear + 1) % capacity;
+        queueArray[rear] = item;
+        size++;
+    }
+
+    public T dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return null;
+        }
+        T item = queueArray[front];
+        front = (front + 1) % capacity;
+        size--;
+        return item;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+}
+
+class GenericQueueLinkedList<T> {
+    private Node<T> front, rear;
+
+    public GenericQueueLinkedList() {
+        this.front = this.rear = null;
+    }
+
+    public void enqueue(T item) {
+        Node<T> newNode = new Node<>(item);
+        if (isEmpty()) {
+            front = rear = newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+
+    public T dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return null;
+        }
+        T item = front.data;
+        front = front.next;
+        if (front == null) {
+            rear = null;
+        }
+        return item;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+}
+
+public class GQueueExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        GenericQueueArray<Integer> intQueueArray = new GenericQueueArray<>(5);
+        GenericQueueLinkedList<Integer> intQueueLinkedList = new GenericQueueLinkedList<>();
+
+        System.out.println("Enter integers to enqueue into the array queue (enter -1 to stop):");
+        int num;
+        while (true) {
+            num = scanner.nextInt();
+            if (num == -1) break;
+            intQueueArray.enqueue(num);
+        }
+
+        System.out.println("Enter integers to enqueue into the linked list queue (enter -1 to stop):");
+        while (true) {
+            num = scanner.nextInt();
+            if (num == -1) break;
+            intQueueLinkedList.enqueue(num);
+        }
+
+        System.out.println("Dequeueing from array queue:");
+        while (!intQueueArray.isEmpty()) {
+            System.out.println(intQueueArray.dequeue());
+        }
+
+        System.out.println("Dequeueing from linked list queue:");
+        while (!intQueueLinkedList.isEmpty()) {
+            System.out.println(intQueueLinkedList.dequeue());
+        }
+    }
+}

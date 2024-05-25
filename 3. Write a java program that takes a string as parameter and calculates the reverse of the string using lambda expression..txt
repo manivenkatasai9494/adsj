@@ -1,0 +1,16 @@
+3. Write a java program that takes a string as parameter and calculates the reverse of the string using lambda expression.
+    //ReverseStringLambda,java
+//ReverseStringLambda
+public class ReverseStringLambda {
+    @FunctionalInterface
+    interface StringReverser {
+        String reverse(String str);
+    }
+    public static void main(String[] args) {
+        StringReverser reverser = (str) -> new StringBuilder(str).reverse().toString();
+        String example = "Hello, World!";
+        String reversed = reverser.reverse(example);
+        System.out.println("Original: " + example);
+        System.out.println("Reversed: " + reversed);
+    }
+}

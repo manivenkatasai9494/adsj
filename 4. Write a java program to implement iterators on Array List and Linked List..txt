@@ -1,0 +1,77 @@
+4. Write a java program to implement iterators on Array List and Linked List.
+//ArrayList
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArrayListIteratorExample {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        
+        Iterator<String> iterator = fruits.iterator();
+        
+        System.out.println("Using Iterator to traverse through the ArrayList:");
+        while (iterator.hasNext()) {
+            String fruit = iterator.next();
+            System.out.println(fruit);
+        }
+        
+        System.out.println("\nUsing for-each loop to traverse through the ArrayList:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+        
+        iterator = fruits.iterator(); // Reset the iterator
+        while (iterator.hasNext()) {
+            String fruit = iterator.next();
+            if (fruit.startsWith("B")) {
+                iterator.remove(); // Remove elements that start with "B"
+            }
+        }
+        
+        System.out.println("\nArrayList after removal of elements that start with 'B':");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
+//4.ALinkedList
+import java.util.LinkedList;
+import java.util.Iterator;
+
+public class LinkedListIteratorExample {
+    public static void main(String[] args) {
+        LinkedList<String> fruits = new LinkedList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Cherry");
+        
+        Iterator<String> iterator = fruits.iterator();
+        
+        System.out.println("Using Iterator to traverse through the LinkedList:");
+        while (iterator.hasNext()) {
+            String fruit = iterator.next();
+            System.out.println(fruit);
+        }
+        
+        System.out.println("\nUsing for-each loop to traverse through the LinkedList:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+        
+        iterator = fruits.iterator(); // Reset the iterator
+        while (iterator.hasNext()) {
+            String fruit = iterator.next();
+            if (fruit.startsWith("B")) {
+                iterator.remove(); 
+            }
+        }
+        
+        System.out.println("\nLinkedList after removal of elements that start with 'B':");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
